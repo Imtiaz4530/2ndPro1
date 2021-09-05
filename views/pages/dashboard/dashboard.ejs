@@ -1,0 +1,61 @@
+<%- include('../../partials/head.ejs') %>
+<div class="container-fluid">
+    <div class="row">   
+        <div class="col md-2">
+            <%- include('../../partials/sidebar.ejs') %>
+        </div>
+            <div class="col-md-10 mydiv3-5">
+                <div class="row">
+                <div class="card card-body mx-5">
+                    <div class="row">
+                        <h5 class="display-6 text-center">My recent posts</h5>
+                        <% if( posts.length === 0 ) { %>
+                            <h4>No post available</h4>
+                        <% } else { %>
+                            <% for (let post of posts) { %>
+                                <div id="dashboardPosts" class="card mt-3 col-sm-3 mb-5 p-4">
+                                    <div class="d-flex">
+                                        <% if(post.thumbnail) { %>
+                                            <div>
+                                                <img class="img-fluid mb-2" src="<%= post.thumbnail %>" alt="Post thumbnail">
+                                            </div>
+                                        <% } %>
+                                    </div>
+                                    <div class="card-body p-0">
+                                        <a href="/explorer/<%= post._id %>" style="color: #222;"><h5><%= post.title %></h5></a>
+                                    </div>
+                                </div>
+                            <% } %>
+                        <% } %>
+                    </div>
+                  </div>
+                        <div class="card card-body mx-5 mt-4">
+                        <div class="row">
+                            <h5 class="display-6 text-center">My recent bookmarks</h5>
+                            <% if( bookmarks.length === 0 ) { %>
+                                <h4>No bookmarks available</h4>
+                            <% } else { %>
+                                <% for (let bookmark of bookmarks) { %>
+                                    <div id="dashboardPosts" class="card mt-3 col-sm-3 mb-5 p-4">
+                                        <div class="d-flex">
+                                            <% if(bookmark.thumbnail) { %>
+                                                <div>
+                                                    <img class="img-fluid mb-2" src="<%= bookmark.thumbnail %>" alt="Post thumbnail">
+                                                </div>
+                                            <% } %>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <a href="/explorer/<%= bookmark._id %>" style="color: #222;"><h5><%= bookmark.title %></h5></a>
+                                        </div>
+                                    </div>
+                                <% } %>
+                            <% } %>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+    </div>
+</div>
+<%- include('../../partials/footer.ejs') %>
+</body>
+</html>

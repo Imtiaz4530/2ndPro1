@@ -1,0 +1,28 @@
+<%- include('../partials/head.ejs') %>
+
+<div class="container my-container my-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3 ">  
+            <div class="card card-body">
+                <h4>Create A New Account</h4>
+            <form class="my-4" action="/upload/play" method="POST" enctype="multipart/form-data">
+                <div class="form-group mb-3">
+                    <label for="username" class="form-label">Username(Must Be Uniq.)</label>
+                    <input type="text" name="username" id="username" class="form-control">
+                </div>
+                <div>
+                <div class="form-group mb-3">
+                    <label for="username" class="form-label">Choose Your File</label>
+                    <input type="file" name="avatar" class="form-control">
+                </div>
+                <div>   
+                </div>
+                <input type="submit" class="btn btn-dark" value="sing up">
+                <a href="/auth/login" class="singup-login">Already have an account? Login now</a>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

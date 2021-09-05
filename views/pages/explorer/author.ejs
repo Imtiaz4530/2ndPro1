@@ -1,0 +1,83 @@
+<%- include('../../partials/head.ejs') %>   
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="d-flex card card-body">
+                    <div id="authorProfilepics">
+                        <img width="100%" src="<%= author.profilePics %>" class="image-thumbnail mb-2 image-fluid">    
+                    </div>
+                    <div class="my-3">
+                        Name : <strong class="my-1"><%= author.profile.name %></strong> <br>
+                        Title : <strong class="my-1"><%= author.profile.title %></strong> <br>
+                        Bio : <span class="my-1"><%= author.profile.bio %></span> <br>
+                     <div  class="my-3">
+                        Social Links :
+                        <% if (author.profile.links.website) { %> 
+                            <span>
+                                <a href="<%= author.profile.links.website %>" target="_blank"><i class="fab fa-internet-explorer"></i></a>
+                            </span>
+                        <% } %>
+                        <% if (author.profile.links.facebook) { %> 
+                            <span>
+                                <a href="<%= author.profile.links.facebook %>" target="_blank"><i class="fab fa-facebook-square"></i></a>
+                            </span>
+                        <% } %>  
+                        <% if (author.profile.links.twitter) { %> 
+                            <span>
+                                <a href="<%= author.profile.links.twitter %>" target="_blank"> <i class="fab fa-twitter-square"></i></a>
+                            </span>
+                        <% } %> 
+                        <% if (author.profile.links.github) { %> 
+                            <span>
+                                <a href="<%= author.profile.links.github %>" target="_blank"><i class="fab fa-github-square"></i></a>
+                            </span>
+                        <% } %> 
+                     </div>
+                     <h3 class="mt-4">My all posts :</h3>  
+                     <div class="row">
+                        <% if(author.profile.posts.length === 0 ) { %>
+                            <h4>No post available</h4>
+                        <% } else { %>
+                            <% for (let post of author.profile.posts) { %>
+                                <div class="card card-body mb-3">
+                                    <div class="d-flex">
+                                        <% if(post.thumbnail) { %>
+                                            <div>
+                                                <img  width="20%" class="img-fluid mb-2" src="<%= post.thumbnail %>" alt="Post thumbnail">
+                                            </div>
+                                        <% } %>
+                                        <% if(user) { %>
+                                            <span class="ml-auto bookmarkforAuthor" data-post="<%= post._id %>">
+                                                <% if(bookmarks.includes(post._id)) { %>
+                                                    <i class="fas fa-bookmark"></i>
+                                                <% } else {%>
+                                                    <i class="far fa-bookmark"></i>
+                                                <% } %>
+                                            </span>
+                                        <% } %>
+                                    </div>
+                                    <a href="/explorer/<%= post._id %>" style="color: #222;">
+                                        <h5><%= post.title %></h5>
+                                        <p class="mb-4"><%= truncate(post.body) %></p>
+                                    </a>
+                                    <div class="d-flex">
+                                        <small>
+                                            <%= moment(post.createdAt)%>,
+                                            Post by <a href="/author/<%= author._id %>"><%= author.username %></a>,
+                                            <%= post.readTime %>
+                                        </small>
+                                    </div>
+                                </div>
+                            <% } %>
+                        <% } %>
+                    </div> 
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+<%- include('../../partials/footer.ejs') %>
+<script src="/script/bookmark.js"></script>
+</body>
+</html>

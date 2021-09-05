@@ -1,0 +1,55 @@
+<%- include('../../../partials/head.ejs') %>
+<div class="container-fluid">
+    <div class="row">   
+        <div class="col md-2">
+            <%- include('../../../partials/sidebar.ejs') %>
+        </div>
+            <div class="col-md-10 mydiv3-5">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+                        <div class="card card-body mx-5">
+                            <h1 class="mx-auto">Edit your post</h1>
+                            <form action="/posts/edit/<%= post._id%>" method="POST"  enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label for="title" class="my-2">Enter your post title</label>
+                                    <input type="text" name="title" id="title" class="form-control my-3 <%= error.title ? 'is-invalid' : ''%>" placeholder="Title" value="<%= post.title%>">
+                                    <div class="invalid-feedback">
+                                        <%= error.title%>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tiny-mce-post-body" class="my-2">Enter your post</label>
+                                    <textarea name="body" id="tiny-mce-post-body" class="form-control my-3 <%= error.body ? 'is-invalid' : ''%>" placeholder="Post"><%= post.body%></textarea>
+                                    <div class="invalid-feedback">
+                                        <%= error.body%>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tags" class="my-2">Tag someone</label>
+                                    <input type="text" name="tags" id="tags" class="form-control my-3" value="<%= post.tags.length > 0 ? post.tags.join(', ') : ''%>">
+                                </div>
+                                <% if (post.thumbnail) { %>
+                                    <label>Post thumbnail</label><br>
+                                    <img width="15%" src="<%= post.thumbnail %>" alt="Post thumbnail" class="img-fluid mb-4" id="">
+                               <% } %> 
+                                <div class="input-group mb-3">
+                                    <div class="input-group mb-3">
+                                        <label class="input-group-text " for="inputGroupFile" id="inputGroupFile" class="my-2">Upload</label>
+                                        <input type="file" name="post-thumbnail" class="form-control" id="inputGroupFile">
+                                        <label class="input-group-text" for="inputGroupFile">Browse</label>
+                                      </div>
+                                </div>
+                                <input type="submit" class="btn btn-primary" value="Update Post">
+                                <a class="btn btn-danger" href="/posts/delete/<%= post._id %>">Delete Post</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+<%- include('../../../partials/footer.ejs') %>
+<script src="https://cdn.tiny.cloud/1/85jcx00dfem6b0xt84kskld3306520hbz0ry92q5l4atq9wn/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="/script/tinymce.js"></script>
+</body>
+</html>
